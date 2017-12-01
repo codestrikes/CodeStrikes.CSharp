@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeCompetition.Sdk\CodeCompetition.Sdk.csproj">
-      <Project>{84f56d89-84b2-4515-a97b-779b7b73305b}</Project>
+      <Project>{62defa1a-df24-47e4-b4d7-008310bc951d}</Project>
       <Name>CodeCompetition.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
