@@ -1,4 +1,6 @@
-﻿namespace CodeCompetition.Sdk
+﻿using System.Collections.Generic;
+
+namespace CodeCompetition.Sdk
 {
     public enum FightResultErrorType
     {
@@ -14,6 +16,29 @@
         Draw
     }
 
+    public class RoundResult
+    {
+        public int RoundNumber { get; }
+        public ReadonlyMoveCollection PlayerMoves { get; }
+        public ReadonlyMoveCollection OpponentMoves { get; }
+        public int PlayerScore { get; }
+        public int OpponentScore { get; }
+
+        public RoundResult(int roundNumber, ReadonlyMoveCollection playerMoves, ReadonlyMoveCollection opponentMoves, int playerScore, int opponentScore)
+        {
+            RoundNumber = roundNumber;
+            PlayerMoves = playerMoves;
+            OpponentMoves = opponentMoves;
+            PlayerScore = playerScore;
+            OpponentScore = opponentScore;            
+        }
+
+        public override string ToString()
+        {
+            return
+                $"Round {RoundNumber} - Player points: {PlayerScore}, Opponent points: {OpponentScore}\nPlayer: {PlayerMoves}\nOpponent: {OpponentMoves}";
+        }
+    }
 
     public class FightResults
     {        
@@ -21,18 +46,23 @@
         public int OpponentScore { get; }
         public FightResultType Result { get; }
         public bool IsError { get; }
-        public string ErrorMessage { get;  }
+        public string ErrorMessage { get; }
         public FightResultErrorType? ErrorType { get; }
+        public List<RoundResult> RoundResults { get; private set; }
 
-        private FightResults(int playerScore, int opponentScore, FightResultType result)
+        private FightResults()
         {
-            
+            RoundResults = new List<RoundResult>();
+        }
+
+        private FightResults(int playerScore, int opponentScore, FightResultType result) : this()
+        {
             PlayerScore = playerScore;
             OpponentScore = opponentScore;
             Result = result;
         }
 
-        public FightResults(FightResultErrorType errorType, FightResultType result, string errorMessage)
+        private FightResults(FightResultErrorType errorType, FightResultType result, string errorMessage) : this()
         {
             ErrorType = errorType;
             Result = result;
@@ -60,15 +90,22 @@
             return new FightResults(errorType, result, errorMessage);
         }
 
+        public FightResults SetRoundResults(List<RoundResult> results)
+        {
+            RoundResults = results;
+            return this;
+        }
+
         public override string ToString()
         {
             if (IsError)
             {
-                return $"{Result.ToString()} with error {nameof(ErrorType)}: {ErrorType.ToString()}, {nameof(ErrorMessage)}: {ErrorMessage}";
+                return
+                    $"{Result.ToString()} with error {nameof(ErrorType)}: {ErrorType.ToString()}, {nameof(ErrorMessage)}: {ErrorMessage}";
             }
-            
-            return $"{Result.ToString()}: {nameof(PlayerScore)}: {PlayerScore}, {nameof(OpponentScore)}: {OpponentScore}";
+
+            return
+                $"{Result.ToString()}: {nameof(PlayerScore)}: {PlayerScore}, {nameof(OpponentScore)}: {OpponentScore}";
         }
-        
     }
 }

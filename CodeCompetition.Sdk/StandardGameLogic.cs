@@ -48,6 +48,7 @@ namespace CodeCompetition.Sdk
         public bool ValidateRound(int roundNumber, int f1Points, int f2Points)
         {
             if (roundNumber >= MaxRounds && f1Points > 0 && f2Points > 0) return false;
+            if (f1Points < 0 && f2Points < 0) return false;
             return true;
         }
     }

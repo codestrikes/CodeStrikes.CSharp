@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,6 +27,7 @@ namespace CodeCompetition.Sdk
             int round = 0;
 
             int f1Lifepoints, f2Lifepoints = f1Lifepoints = gameLogic.LifePoints;
+            List<RoundResult> roundResults = new List<RoundResult>();
 
             while (f1Lifepoints > 0 && f2Lifepoints > 0)
             {
@@ -44,13 +46,13 @@ namespace CodeCompetition.Sdk
                 }
                 catch (Exception exc)
                 {
-                    return FightResults.Error(FightResultErrorType.Runtime, FightResultType.Lost, exc.Message);
+                    return FightResults.Error(FightResultErrorType.Runtime, FightResultType.Lost, exc.Message).SetRoundResults(roundResults).SetRoundResults(roundResults);
                 }
                 if (!result)
-                    return FightResults.Error(FightResultErrorType.Timeout, FightResultType.Lost, bot1 + " exceeded move timeout");                    
+                    return FightResults.Error(FightResultErrorType.Timeout, FightResultType.Lost, bot1 + " exceeded move timeout").SetRoundResults(roundResults);
                 if (gameLogic.Validate(moves) == false)
-                    return FightResults.Error(FightResultErrorType.IllegalMove, FightResultType.Lost, bot1 + " made an illegal move");
-                
+                    return FightResults.Error(FightResultErrorType.IllegalMove, FightResultType.Lost, bot1 + " made an illegal move").SetRoundResults(roundResults);
+
 
                 RoundContext bot2Context = new RoundContext(f1Move, score2, score1);
                 try
@@ -61,13 +63,13 @@ namespace CodeCompetition.Sdk
                 }
                 catch (Exception exc)
                 {
-                    return FightResults.Error(FightResultErrorType.Runtime, FightResultType.Win, exc.Message);
+                    return FightResults.Error(FightResultErrorType.Runtime, FightResultType.Win, exc.Message).SetRoundResults(roundResults);
                 }
                 if (!result)
-                    return FightResults.Error(FightResultErrorType.Timeout, FightResultType.Win, bot2 + " exceeded move timeout");
+                    return FightResults.Error(FightResultErrorType.Timeout, FightResultType.Win, bot2 + " exceeded move timeout").SetRoundResults(roundResults);
                 if (gameLogic.Validate(moves) == false)
-                    return FightResults.Error(FightResultErrorType.IllegalMove, FightResultType.Win, bot2 + " made an illegal move");
-                
+                    return FightResults.Error(FightResultErrorType.IllegalMove, FightResultType.Win, bot2 + " made an illegal move").SetRoundResults(roundResults);
+
                 f1Move = bot1Context.MyMoves;
                 f2Move = bot2Context.MyMoves;
 
@@ -77,21 +79,24 @@ namespace CodeCompetition.Sdk
                 f1Lifepoints -= score2;
                 f2Lifepoints -= score1;
 
+                RoundResult roundResult = new RoundResult(round, f1Move, f2Move, score1, score2);
+                roundResults.Add(roundResult);
+
                 if (!gameLogic.ValidateRound(round, f1Lifepoints, f2Lifepoints))
                 {
-                    return FightResults.Draw(f1Lifepoints, f2Lifepoints);
+                    return FightResults.Draw(f1Lifepoints, f2Lifepoints).SetRoundResults(roundResults); 
                 }
             }
 
             if (f1Lifepoints > f2Lifepoints)
             {
-                return FightResults.Win(f1Lifepoints, f2Lifepoints);
+                return FightResults.Win(f1Lifepoints, f2Lifepoints).SetRoundResults(roundResults);
             }
             else if (f1Lifepoints == f2Lifepoints)
             {
-                return FightResults.Draw(f1Lifepoints, f2Lifepoints);
+                return FightResults.Draw(f1Lifepoints, f2Lifepoints).SetRoundResults(roundResults);
             }
-            return FightResults.Lost(f1Lifepoints, f2Lifepoints);
+            return FightResults.Lost(f1Lifepoints, f2Lifepoints).SetRoundResults(roundResults);
         }
     }
 
