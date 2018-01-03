@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -50,7 +51,7 @@ namespace CodeCompetition.Sdk
                 }
                 if (!result)
                     return FightResults.Error(FightResultErrorType.Timeout, FightResultType.Lost, bot1 + " exceeded move timeout").SetRoundResults(roundResults);
-                if (gameLogic.Validate(moves) == false)
+                if (!gameLogic.Validate(moves))
                     return FightResults.Error(FightResultErrorType.IllegalMove, FightResultType.Lost, bot1 + " made an illegal move").SetRoundResults(roundResults);
 
 
@@ -67,7 +68,7 @@ namespace CodeCompetition.Sdk
                 }
                 if (!result)
                     return FightResults.Error(FightResultErrorType.Timeout, FightResultType.Win, bot2 + " exceeded move timeout").SetRoundResults(roundResults);
-                if (gameLogic.Validate(moves) == false)
+                if (!gameLogic.Validate(moves))
                     return FightResults.Error(FightResultErrorType.IllegalMove, FightResultType.Win, bot2 + " made an illegal move").SetRoundResults(roundResults);
 
                 f1Move = bot1Context.MyMoves;
@@ -107,15 +108,22 @@ namespace CodeCompetition.Sdk
         BotException
     }
 
+    [Serializable]
     public class FightException : Exception
     {
         public FightExceptionReason Reason { get; }
+
         public BotBase ErrorBot { get; }
 
         public FightException(string message, FightExceptionReason reason, BotBase errorBot, Exception innerException = null) : base(message, innerException)
         {
             Reason = reason;
             ErrorBot = errorBot;
+        }
+
+        protected FightException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            
         }
     }
 }

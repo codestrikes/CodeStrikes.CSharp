@@ -12,9 +12,15 @@ namespace CodeCompetition.Sdk
 
         public ReadOnlyCollection<Move> Moves => new ReadOnlyCollection<Move>(moveList);
 
-        public ReadOnlyCollection<Move> Attacks => new ReadOnlyCollection<Move>(moveList.Where(x=>x.Type == MoveType.Attack).ToList());
+        public ReadOnlyCollection<Move> GetAttacks()
+        {
+            return new ReadOnlyCollection<Move>(moveList.Where(x => x.Type == MoveType.Attack).ToList());
+        }
 
-        public ReadOnlyCollection<Move> Defences => new ReadOnlyCollection<Move>(moveList.Where(x => x.Type == MoveType.Defense).ToList());
+        public ReadOnlyCollection<Move> GetDefences()
+        {
+            return new ReadOnlyCollection<Move>(moveList.Where(x => x.Type == MoveType.Defense).ToList());
+        }
 
         public ReadonlyMoveCollection()
         {

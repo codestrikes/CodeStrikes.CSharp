@@ -6,8 +6,15 @@ namespace CodeCompetition.Sdk
     {
         public abstract MoveCollection NextMove(RoundContext context);
 
-        public virtual void Dispose()
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
         {
         }
+
     }
 }

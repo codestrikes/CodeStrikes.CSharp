@@ -8,43 +8,37 @@ namespace CodeCompetition.Sdk
         public MoveType Type { get; }
         public Area Area { get; }
 
-        public int AttackPower
+        public int GetAttackPower()
         {
-            get
+            switch (this.Area)
             {
-                switch (this.Area)
-                {
-                    case Area.Sensors: return 10;
-                    case Area.Head: return 5;
-                    case Area.Torso: return 1;
-                    case Area.Belly: return 1;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(Area), Area, null);
-                }
+                case Area.Sensors: return 10;
+                case Area.Head: return 5;
+                case Area.Torso: return 1;
+                case Area.Belly: return 1;
+                default:
+                    throw new ArgumentOutOfRangeException("Invalid area " + Area, (Exception)null);
             }
         }
 
-        public int Energy
+        public int GetEnergy()
         {
-            get
+            if (this.Type == MoveType.Attack)
             {
-                if (this.Type == MoveType.Attack)
+                switch (this.Area)
                 {
-                    switch (this.Area)
-                    {
-                        case Area.Sensors: return 3;
-                        case Area.Head: return 2;
-                        case Area.Torso: return 1;
-                        case Area.Belly: return 1;
-                        default:
-                            throw new ArgumentOutOfRangeException(nameof(Move.Area), this.Area, null);
-                    }
+                    case Area.Sensors: return 3;
+                    case Area.Head: return 2;
+                    case Area.Torso: return 1;
+                    case Area.Belly: return 1;
+                    default:
+                        throw new ArgumentOutOfRangeException("Invalid area " + Area, (Exception)null);
                 }
-                // Defense
-                else
-                {
-                    return 3;
-                }
+            }
+            // Defense
+            else
+            {
+                return 3;
             }
         }
 
@@ -56,7 +50,7 @@ namespace CodeCompetition.Sdk
 
         public override string ToString()
         {
-            return $"{Type} on {Area} (P:{AttackPower}, E:{Energy})";
+            return $"{Type} on {Area} (P:{GetAttackPower()}, E:{GetEnergy()})";
         }
     }
 }

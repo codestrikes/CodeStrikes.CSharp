@@ -6,8 +6,7 @@ namespace CodeCompetition.Sdk.Bots
     public class Kickboxer : BotBase
     {
         private Area attack1 = Area.Head;
-        private Area attack2 = Area.Sensors;
-        private Area defence = Area.Sensors;
+        private readonly Area defence = Area.Sensors;
     
         private Area CreateRandomArea() 
         {
@@ -26,12 +25,12 @@ namespace CodeCompetition.Sdk.Bots
 
         public override MoveCollection NextMove(RoundContext context)
         {
-            if (context.LastOpponentMoves?.Defences.Any(x => x.Area == this.attack1) == true)
+            if (context.LastOpponentMoves?.GetDefences().Any(x => x.Area == this.attack1) == true)
             {
                 this.attack1 = CreateRandomArea();
             }
 
-            this.attack2 = CreateRandomArea();
+            var attack2 = CreateRandomArea();
 
             context.MyMoves
                 .AddAttack(attack1)

@@ -5,8 +5,8 @@ namespace CodeCompetition.Sdk.Bots
 {
     public class Boxer : BotBase
     {
-        private Area attack1 = Area.Sensors;
-        private Area attack2 = Area.Head;
+        private readonly Area attack1 = Area.Sensors;
+        private readonly Area attack2 = Area.Head;
         private Area defence = Area.Sensors;
 
         private int myScoreTotal = 0;
@@ -31,7 +31,7 @@ namespace CodeCompetition.Sdk.Bots
                 .AddAttack(attack1)
                 .AddAttack(attack2);
 
-            if (context.LastOpponentMoves?.Attacks.Any(x => x.Area == defence) == false)
+            if (context.LastOpponentMoves?.GetAttacks().Any(x => x.Area == defence) == false)
             {
                 defence = ChangeDefence(defence);
             }
