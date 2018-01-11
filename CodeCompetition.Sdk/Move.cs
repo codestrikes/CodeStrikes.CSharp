@@ -10,7 +10,7 @@ namespace CodeCompetition.Sdk
 
         public int GetAttackPower()
         {
-            switch (this.Area)
+            switch (Area)
             {
                 case Area.Sensors: return 10;
                 case Area.Head: return 5;
@@ -23,9 +23,9 @@ namespace CodeCompetition.Sdk
 
         public int GetEnergy()
         {
-            if (this.Type == MoveType.Attack)
+            if (Type == MoveType.Attack)
             {
-                switch (this.Area)
+                switch (Area)
                 {
                     case Area.Sensors: return 3;
                     case Area.Head: return 2;
