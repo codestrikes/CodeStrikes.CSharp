@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace CodeCompetition.Sdk
+namespace CodeStrikes.Sdk
 {
     public interface IGameLogic
     {

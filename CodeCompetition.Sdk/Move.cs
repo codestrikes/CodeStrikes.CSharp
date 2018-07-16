@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeCompetition.Sdk
+namespace CodeStrikes.Sdk
 {
     [Serializable]
     public class Move
@@ -12,10 +12,10 @@ namespace CodeCompetition.Sdk
         {
             switch (Area)
             {
-                case Area.Sensors: return 10;
-                case Area.Head: return 5;
-                case Area.Torso: return 1;
-                case Area.Belly: return 1;
+                case Area.HookKick: return 10;
+                case Area.HookPunch: return 5;
+                case Area.UppercutPunch: return 1;
+                case Area.LowKick: return 1;
                 default:
                     throw new ArgumentOutOfRangeException("Invalid area " + Area, (Exception)null);
             }
@@ -27,10 +27,10 @@ namespace CodeCompetition.Sdk
             {
                 switch (Area)
                 {
-                    case Area.Sensors: return 3;
-                    case Area.Head: return 2;
-                    case Area.Torso: return 1;
-                    case Area.Belly: return 1;
+                    case Area.HookKick: return 3;
+                    case Area.HookPunch: return 2;
+                    case Area.UppercutPunch: return 1;
+                    case Area.LowKick: return 1;
                     default:
                         throw new ArgumentOutOfRangeException("Invalid area " + Area, (Exception)null);
                 }

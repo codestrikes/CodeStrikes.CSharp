@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Linq;
 
-namespace CodeCompetition.Sdk.Bots
+namespace CodeStrikes.Sdk.Bots
 {
     public class Boxer : BotBase
     {
-        private readonly Area attack1 = Area.Sensors;
-        private readonly Area attack2 = Area.Head;
-        private Area defence = Area.Sensors;
+        private readonly Area attack1 = Area.HookKick;
+        private readonly Area attack2 = Area.HookPunch;
+        private Area defence = Area.HookKick;
 
         private int myScoreTotal = 0;
         private int opponentScoreTotal = 0;
 
         private Area ChangeDefence(Area oldDefence)
         {
-            return (oldDefence == Area.Sensors) ? Area.Head : Area.Sensors;
+            return (oldDefence == Area.HookKick) ? Area.HookPunch : Area.HookKick;
         }
 
         private Area CreateRandomAttack()
         {
-            return new Random().NextDouble() > 0.5d ? Area.Belly : Area.Head;
+            return new Random().NextDouble() > 0.5d ? Area.LowKick : Area.HookPunch;
         }
 
         public override MoveCollection NextMove(RoundContext context)

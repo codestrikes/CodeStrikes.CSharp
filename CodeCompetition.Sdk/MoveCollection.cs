@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace CodeCompetition.Sdk
+namespace CodeStrikes.Sdk
 {
     [Serializable]
     public class ReadonlyMoveCollection

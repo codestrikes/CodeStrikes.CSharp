@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCompetition.TestingApp", "CodeCompetition.TestingApp\CodeCompetition.TestingApp.csproj", "{13E37209-D2E4-4A88-B256-CF64366A1284}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeStrikes.TestingApp", "CodeCompetition.TestingApp\CodeStrikes.TestingApp.csproj", "{13E37209-D2E4-4A88-B256-CF64366A1284}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCompetition.Sdk", "CodeCompetition.Sdk\CodeCompetition.Sdk.csproj", "{62DEFA1A-DF24-47E4-B4D7-008310BC951D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeStrikes.Sdk", "CodeCompetition.Sdk\CodeStrikes.Sdk.csproj", "{62DEFA1A-DF24-47E4-B4D7-008310BC951D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

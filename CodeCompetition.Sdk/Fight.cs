@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CodeCompetition.Sdk
+namespace CodeStrikes.Sdk
 {
     public class Fight
     {

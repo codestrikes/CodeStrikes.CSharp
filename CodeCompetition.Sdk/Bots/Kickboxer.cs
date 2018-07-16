@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Linq;
 
-namespace CodeCompetition.Sdk.Bots
+namespace CodeStrikes.Sdk.Bots
 {
     public class Kickboxer : BotBase
     {
-        private Area attack1 = Area.Head;
-        private readonly Area defence = Area.Sensors;
+        private Area attack1 = Area.HookPunch;
+        private readonly Area defence = Area.HookKick;
     
         private Area CreateRandomArea() 
         {
             double random = new Random().NextDouble();
             if (random<0.3)
-                return Area.Sensors;
+                return Area.HookKick;
 
             if (random<0.7)
-                return Area.Head;
+                return Area.HookPunch;
 
             if (random<0.9)
-                return Area.Belly;
+                return Area.LowKick;
 
-            return Area.Belly;
+            return Area.LowKick;
         }
 
         public override MoveCollection NextMove(RoundContext context)

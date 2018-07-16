@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeCompetition.Sdk
+namespace CodeStrikes.Sdk
 {
     public abstract class BotBase : MarshalByRefObject, IDisposable
     {

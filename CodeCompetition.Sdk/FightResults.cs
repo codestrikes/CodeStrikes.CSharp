@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CodeCompetition.Sdk
+namespace CodeStrikes.Sdk
 {
     public enum FightResultErrorType
     {

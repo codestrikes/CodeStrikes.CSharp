@@ -1,8 +1,8 @@
 ﻿using System;
-using CodeCompetition.Sdk;
-using CodeCompetition.Sdk.Bots;
+using CodeStrikes.Sdk;
+using CodeStrikes.Sdk.Bots;
 
-namespace CodeCompetition.TestingApp
+namespace CodeStrikes.TestingApp
 {
     class Program
     {

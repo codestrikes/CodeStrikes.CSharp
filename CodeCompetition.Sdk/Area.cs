@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace CodeCompetition.Sdk
+namespace CodeStrikes.Sdk
 {
     [Serializable]
     public enum Area
     {
-        Sensors,
-        Head,
-        Torso,
-        Belly
+        HookKick,
+        HookPunch,
+        UppercutPunch,
+        LowKick
     }
 }
