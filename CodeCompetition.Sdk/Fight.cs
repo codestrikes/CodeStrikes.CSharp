@@ -89,7 +89,11 @@ namespace CodeStrikes.Sdk
                 }
             }
 
-            if (f1Lifepoints > f2Lifepoints)
+            if (f1Lifepoints <= 0 && f2Lifepoints <= 0)
+            {
+                return FightResults.Draw(f1Lifepoints, f2Lifepoints).SetRoundResults(roundResults);
+            }
+            else if (f1Lifepoints > f2Lifepoints)
             {
                 return FightResults.Win(f1Lifepoints, f2Lifepoints).SetRoundResults(roundResults);
             }
