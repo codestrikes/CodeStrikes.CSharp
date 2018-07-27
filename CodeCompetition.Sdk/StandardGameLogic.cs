@@ -15,8 +15,8 @@ namespace CodeStrikes.Sdk
     public class StandardGameLogic : IGameLogic
     {
         public int LifePoints => 200;        
-        public int Energy => 9;
-        public int MaxRounds => 200;
+        public int Energy => 12;
+        public int MaxRounds => 120;
 
         public TimeSpan MaxMoveTime { get; }
 

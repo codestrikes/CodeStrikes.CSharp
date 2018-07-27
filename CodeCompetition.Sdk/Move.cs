@@ -13,8 +13,8 @@ namespace CodeStrikes.Sdk
             switch (Area)
             {
                 case Area.HookKick: return 10;
-                case Area.HookPunch: return 5;
-                case Area.UppercutPunch: return 1;
+                case Area.HookPunch: return 6;
+                case Area.UppercutPunch: return 3;
                 case Area.LowKick: return 1;
                 default:
                     throw new ArgumentOutOfRangeException("Invalid area " + Area, (Exception)null);
@@ -27,9 +27,9 @@ namespace CodeStrikes.Sdk
             {
                 switch (Area)
                 {
-                    case Area.HookKick: return 3;
-                    case Area.HookPunch: return 2;
-                    case Area.UppercutPunch: return 1;
+                    case Area.HookKick: return 4;
+                    case Area.HookPunch: return 3;
+                    case Area.UppercutPunch: return 2;
                     case Area.LowKick: return 1;
                     default:
                         throw new ArgumentOutOfRangeException("Invalid area " + Area, (Exception)null);
