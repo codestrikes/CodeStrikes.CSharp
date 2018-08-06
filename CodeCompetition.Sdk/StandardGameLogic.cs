@@ -16,7 +16,7 @@ namespace CodeStrikes.Sdk
     {
         public int LifePoints => 200;        
         public int Energy => 12;
-        public int MaxRounds => 120;
+        public int MaxRounds => 100;
 
         public TimeSpan MaxMoveTime { get; }
 
