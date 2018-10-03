@@ -2,6 +2,29 @@
 
 namespace CodeStrikes.Sdk
 {
+
+    public class FightResultError
+    {
+        public FightResultError()
+        {
+
+        }
+        public FightResultError(FightResultErrorType errorType, string stackTrace, string message)
+        {
+            ErrorType = errorType;
+            StackTrace = stackTrace;
+            Message = message;
+        }
+        public FightResultError(FightResultErrorType errorType, string message)
+        {
+            ErrorType = errorType;
+            Message = message;
+        }
+
+        public FightResultErrorType ErrorType { get; set; }
+        public string StackTrace { get; set; }
+        public string Message { get; set; }
+    }
     public enum FightResultErrorType
     {
         Timeout,
@@ -30,7 +53,7 @@ namespace CodeStrikes.Sdk
             PlayerMoves = playerMoves;
             OpponentMoves = opponentMoves;
             PlayerScore = playerScore;
-            OpponentScore = opponentScore;            
+            OpponentScore = opponentScore;
         }
 
         public override string ToString()
@@ -41,13 +64,12 @@ namespace CodeStrikes.Sdk
     }
 
     public class FightResults
-    {        
+    {
         public int PlayerScore { get; }
         public int OpponentScore { get; }
         public FightResultType Result { get; }
         public bool IsError { get; }
-        public string ErrorMessage { get; }
-        public FightResultErrorType? ErrorType { get; }
+        public FightResultError Error { get; }
         public List<RoundResult> RoundResults { get; private set; }
 
         private FightResults()
@@ -62,11 +84,10 @@ namespace CodeStrikes.Sdk
             Result = result;
         }
 
-        private FightResults(FightResultErrorType errorType, FightResultType result, string errorMessage) : this()
+        private FightResults(FightResultError error, FightResultType result) : this()
         {
-            ErrorType = errorType;
+            Error = error;
             Result = result;
-            ErrorMessage = errorMessage;
             IsError = true;
         }
 
@@ -85,9 +106,9 @@ namespace CodeStrikes.Sdk
             return new FightResults(playerScore, opponentScore, FightResultType.Lost);
         }
 
-        public static FightResults Error(FightResultErrorType errorType, FightResultType result, string errorMessage)
+        public static FightResults SetError(FightResultError error, FightResultType result)
         {
-            return new FightResults(errorType, result, errorMessage);
+            return new FightResults(error, result);
         }
 
         public FightResults SetRoundResults(List<RoundResult> results)
@@ -101,7 +122,7 @@ namespace CodeStrikes.Sdk
             if (IsError)
             {
                 return
-                    $"{Result.ToString()} with error {nameof(ErrorType)}: {ErrorType.ToString()}, {nameof(ErrorMessage)}: {ErrorMessage}";
+                    $"{Result.ToString()} with error {nameof(Error.ErrorType)}: {Error.ErrorType.ToString()}, {nameof(Error.Message)}: {Error.Message}";
             }
 
             return

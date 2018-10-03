@@ -29,7 +29,7 @@ namespace CodeStrikes.Sdk
 
         public override string ToString()
         {
-            var res = moveList.Select(x=>x.ToString()).Aggregate((x,y) => $"{x}, {y}");
+            var res = moveList.Select(x => x.ToString()).Aggregate((x, y) => $"{x}, {y}");
             return res;
         }
     }

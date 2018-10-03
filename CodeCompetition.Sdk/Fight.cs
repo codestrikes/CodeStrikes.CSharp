@@ -47,12 +47,22 @@ namespace CodeStrikes.Sdk
                 }
                 catch (Exception exc)
                 {
-                    return FightResults.Error(FightResultErrorType.Runtime, FightResultType.Lost, exc.Message).SetRoundResults(roundResults).SetRoundResults(roundResults);
+                    FightResultError error = new FightResultError(FightResultErrorType.Runtime, exc.InnerException.StackTrace, exc.InnerException.Message);
+                    return FightResults.SetError(error, FightResultType.Lost).SetRoundResults(roundResults).SetRoundResults(roundResults);
                 }
+
                 if (!result)
-                    return FightResults.Error(FightResultErrorType.Timeout, FightResultType.Lost, bot1 + " exceeded move timeout").SetRoundResults(roundResults);
+                {
+                    FightResultError error = new FightResultError(FightResultErrorType.Timeout, bot1 + " exceeded move timeout");
+                    return FightResults.SetError(error, FightResultType.Lost).SetRoundResults(roundResults);
+                }
+
+
                 if (!gameLogic.Validate(moves))
-                    return FightResults.Error(FightResultErrorType.IllegalMove, FightResultType.Lost, bot1 + " made an illegal move").SetRoundResults(roundResults);
+                {
+                    FightResultError error = new FightResultError(FightResultErrorType.IllegalMove, bot1 + " made an illegal move");
+                    return FightResults.SetError(error, FightResultType.Lost).SetRoundResults(roundResults);
+                }
 
 
                 RoundContext bot2Context = new RoundContext(f1Move, score2, score1);
@@ -64,12 +74,22 @@ namespace CodeStrikes.Sdk
                 }
                 catch (Exception exc)
                 {
-                    return FightResults.Error(FightResultErrorType.Runtime, FightResultType.Win, exc.Message).SetRoundResults(roundResults);
+                    FightResultError error = new FightResultError(FightResultErrorType.Runtime, exc.InnerException.StackTrace, exc.InnerException.Message);
+                    return FightResults.SetError(error, FightResultType.Lost).SetRoundResults(roundResults).SetRoundResults(roundResults);
                 }
+
                 if (!result)
-                    return FightResults.Error(FightResultErrorType.Timeout, FightResultType.Win, bot2 + " exceeded move timeout").SetRoundResults(roundResults);
+                {
+                    FightResultError error = new FightResultError(FightResultErrorType.Timeout, bot2 + " exceeded move timeout");
+                    return FightResults.SetError(error, FightResultType.Lost).SetRoundResults(roundResults);
+                }
+
                 if (!gameLogic.Validate(moves))
-                    return FightResults.Error(FightResultErrorType.IllegalMove, FightResultType.Win, bot2 + " made an illegal move").SetRoundResults(roundResults);
+                {
+                    FightResultError error = new FightResultError(FightResultErrorType.IllegalMove, bot2 + " made an illegal move");
+                    return FightResults.SetError(error, FightResultType.Lost).SetRoundResults(roundResults);
+                }
+
 
                 f1Move = bot1Context.MyMoves;
                 f2Move = bot2Context.MyMoves;
@@ -85,7 +105,7 @@ namespace CodeStrikes.Sdk
 
                 if (!gameLogic.ValidateRound(round, f1Lifepoints, f2Lifepoints))
                 {
-                    return FightResults.Draw(f1Lifepoints, f2Lifepoints).SetRoundResults(roundResults); 
+                    return FightResults.Draw(f1Lifepoints, f2Lifepoints).SetRoundResults(roundResults);
                 }
             }
 
@@ -127,7 +147,7 @@ namespace CodeStrikes.Sdk
 
         protected FightException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            
+
         }
     }
 }
