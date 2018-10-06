@@ -34,7 +34,7 @@ namespace CodeStrikes.Sdk
             {
                 round++;
 
-                RoundContext bot1Context = new RoundContext(f2Move, score1, score2);
+                RoundContext bot1Context = new RoundContext(f2Move, score1, score2, f1Lifepoints, f2Lifepoints);
 
                 MoveCollection moves = null;
                 bool result;
@@ -65,7 +65,7 @@ namespace CodeStrikes.Sdk
                 }
 
 
-                RoundContext bot2Context = new RoundContext(f1Move, score2, score1);
+                RoundContext bot2Context = new RoundContext(f1Move, score2, score1, f2Lifepoints, f1Lifepoints);
                 try
                 {
                     result = Task.Run(() => moves = bot2.NextMove(bot2Context), CancellationToken.None)
