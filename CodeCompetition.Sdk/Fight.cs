@@ -75,19 +75,19 @@ namespace CodeStrikes.Sdk
                 catch (Exception exc)
                 {
                     FightResultError error = new FightResultError(FightResultErrorType.Runtime, exc.InnerException.StackTrace, exc.InnerException.Message);
-                    return FightResults.SetError(error, FightResultType.Lost).SetRoundResults(roundResults).SetRoundResults(roundResults);
+                    return FightResults.SetError(error, FightResultType.Win).SetRoundResults(roundResults).SetRoundResults(roundResults);
                 }
 
                 if (!result)
                 {
                     FightResultError error = new FightResultError(FightResultErrorType.Timeout, bot2 + " exceeded move timeout");
-                    return FightResults.SetError(error, FightResultType.Lost).SetRoundResults(roundResults);
+                    return FightResults.SetError(error, FightResultType.Win).SetRoundResults(roundResults);
                 }
 
                 if (!gameLogic.Validate(moves))
                 {
                     FightResultError error = new FightResultError(FightResultErrorType.IllegalMove, bot2 + " made an illegal move");
-                    return FightResults.SetError(error, FightResultType.Lost).SetRoundResults(roundResults);
+                    return FightResults.SetError(error, FightResultType.Win).SetRoundResults(roundResults);
                 }
 
 
