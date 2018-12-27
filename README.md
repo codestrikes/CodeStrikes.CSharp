@@ -1,4 +1,4 @@
-# CodeStrikes
+# CodeStrikes (http://codestrikes.net/)
 
 ## SDK
 This is SDK for C# language. You can use it to write and test Your BOT.
