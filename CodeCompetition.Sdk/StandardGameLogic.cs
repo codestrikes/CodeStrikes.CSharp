@@ -22,7 +22,7 @@ namespace CodeStrikes.Sdk
 
         public StandardGameLogic()
         {
-            MaxMoveTime = TimeSpan.FromSeconds(0.5);
+            MaxMoveTime = TimeSpan.FromSeconds(1);
         }
 
         public int CalculateScore(ReadonlyMoveCollection attacker, ReadonlyMoveCollection defender)
